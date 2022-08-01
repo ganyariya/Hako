@@ -1,0 +1,31 @@
+{
+    "name": "ganyariya/hako",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Ganyariya\\Hako\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ganyariya\\Hako\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ganariya",
+            "email": "ganariya2525@gmail.com"
+        }
+    ],
+    "scripts": {
+        "test": [
+            "phpunit"
+        ]
+    },
+    "require": {
+        "phpunit/phpunit": "^9.5",
+        "psr/container": "^2.0",
+        "phpstan/phpstan": "^1.8",
+        "psalm/phar": "^4.25"
+    }
+}
