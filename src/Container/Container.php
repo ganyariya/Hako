@@ -31,6 +31,11 @@ class Container implements ContainerInterface
             throw new ContainerException("Not Found: $id");
         }
         $data = $this->data[$id];
+
+        if (ContainerService::isContainerClosure($data)) {
+            return $data($this);
+        }
+
         return $data instanceof FetcherInterface
             ? $data->fetch($this)
             : $data;

@@ -10,6 +10,7 @@ use Ganyariya\Hako\Exception\ContainerException;
 use Ganyariya\Hako\Tests\VTuber\NijisanjiVTuber;
 use Ganyariya\Hako\Tests\VTuber\VTuberInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 
 class ContainerTest extends TestCase
 {
@@ -21,6 +22,18 @@ class ContainerTest extends TestCase
 
         $this->assertSame("world!", $container->get("hello"));
         $this->assertSame("world!", $container->get("hello"));
+    }
+
+    public function testContainerClosure(): void
+    {
+        $container = new Container();
+        $container->set("UDK", "Kou");
+        $container->set(VTuberInterface::class, function (ContainerInterface $c) {
+            $name = $c->get("UDK");
+            return new NijisanjiVTuber($name);
+        });
+
+        $this->assertSame("Kou", $container->get(VTuberInterface::class)->getName());
     }
 
     public function testFetcher(): void
