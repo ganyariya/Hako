@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ganyariya\Hako\Container;
 
+use Ganyariya\Hako\Cache\Cache;
 use Ganyariya\Hako\Exception\ContainerException;
 use Ganyariya\Hako\Fetcher\FetcherInterface;
 use Psr\Container\ContainerInterface;
@@ -11,7 +12,7 @@ use Psr\Container\ContainerInterface;
 class Container implements ContainerInterface
 {
     /**
-     * @var array<string, mixed>
+     * @var array<string, Cache>
      */
     private array $data;
 
@@ -22,7 +23,7 @@ class Container implements ContainerInterface
 
     public function set(string $id, mixed $value): void
     {
-        $this->data[$id] = $value;
+        $this->data[$id] = new Cache($value);
     }
 
     public function get(string $id): mixed
@@ -30,15 +31,27 @@ class Container implements ContainerInterface
         if (!$this->has($id)) {
             throw new ContainerException("Not Found: $id");
         }
-        $data = $this->data[$id];
-
-        if (ContainerService::isContainerClosure($data)) {
-            return $data($this);
+        $cache = $this->data[$id];
+        if ($cache->isResolved()) {
+            return $cache->getResolvedData();
         }
 
-        return $data instanceof FetcherInterface
-            ? $data->fetch($this)
-            : $data;
+        $actual = $cache->getActualData();
+        if (ContainerService::isContainerClosure($actual)) {
+            /** @var \Closure $actual */
+            $resolved = $actual($this);
+            $cache->cache($resolved);
+            return $resolved;
+        }
+
+        if ($actual instanceof FetcherInterface) {
+            $resolved = $actual->fetch($this);
+            $cache->cache($resolved);
+            return $resolved;
+        } else {
+            $cache->cache($actual);
+            return $actual;
+        }
     }
 
     public function has(string $id): bool

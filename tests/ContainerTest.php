@@ -24,6 +24,19 @@ class ContainerTest extends TestCase
         $this->assertSame("world!", $container->get("hello"));
     }
 
+    public function testCache(): void
+    {
+        $container = new Container();
+        $container->set(VTuberInterface::class, function (ContainerInterface $c) {
+            return new NijisanjiVTuber("uduki");
+        });
+        $container->set("b", Hako\fetch(VTuberInterface::class));
+
+        $this->assertSame("uduki", $container->get(VTuberInterface::class)->getName());
+        $this->assertSame("uduki", $container->get("b")->getName());
+        $this->assertTrue($container->get(VTuberInterface::class) === $container->get("b"));
+    }
+
     public function testContainerClosure(): void
     {
         $container = new Container();
