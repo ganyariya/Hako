@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ganyariya\Hako;
+namespace Ganyariya\Hako\Container;
 
-use ContainerException;
+use Ganyariya\Hako\Exception\ContainerException;
+use Ganyariya\Hako\Fetcher\FetcherInterface;
 use Psr\Container\ContainerInterface;
 
 class Container implements ContainerInterface
@@ -14,9 +15,14 @@ class Container implements ContainerInterface
      */
     private array $data;
 
-    public function __construct()
+    public function __construct(array $data = [])
     {
-        $this->data = [];
+        $this->data = $data;
+    }
+
+    public function set(string $id, mixed $value): void
+    {
+        $this->data[$id] = $value;
     }
 
     public function get(string $id): mixed
@@ -24,7 +30,10 @@ class Container implements ContainerInterface
         if (!$this->has($id)) {
             throw new ContainerException("Not Found: $id");
         }
-        return $this->data[$id];
+        $data = $this->data[$id];
+        return $data instanceof FetcherInterface
+            ? $data->fetch($this)
+            : $data;
     }
 
     public function has(string $id): bool

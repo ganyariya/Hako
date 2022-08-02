@@ -4,7 +4,10 @@
     "autoload": {
         "psr-4": {
             "Ganyariya\\Hako\\": "src/"
-        }
+        },
+        "files": [
+            "src/functions.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

@@ -4,14 +4,47 @@ declare(strict_types=1);
 
 namespace Ganyariya\Hako\Tests;
 
-use Ganyariya\Hako\Container;
+use Ganyariya\Hako;
+use Ganyariya\Hako\Container\Container;
+use Ganyariya\Hako\Exception\ContainerException;
+use Ganyariya\Hako\Tests\VTuber\NijisanjiVTuber;
+use Ganyariya\Hako\Tests\VTuber\VTuberInterface;
 use PHPUnit\Framework\TestCase;
 
 class ContainerTest extends TestCase
 {
-    public function testContainer(): void
+    public function testContainerSet(): void
     {
         $container = new Container();
-        $this->assertInstanceOf(Container::class, $container);
+        $container->set("hello", "world!");
+        $container->set("Hello", "World!");
+
+        $this->assertSame("world!", $container->get("hello"));
+        $this->assertSame("world!", $container->get("hello"));
+    }
+
+    public function testFetcher(): void
+    {
+        $container = new Container();
+        $container->set(VTuberInterface::class, new NijisanjiVTuber("uduki"));
+        $container->set("UDK", Hako\fetch(VTuberInterface::class));
+        $this->assertSame("uduki", $container->get("UDK")->getName());
+    }
+
+    public function testContainerInterfaceToObject(): void
+    {
+        $container = new Container();
+        $container->set(VTuberInterface::class, new NijisanjiVTuber("uduki"));
+        /** @var NijisanjiVTuber $uduki */
+        $uduki = $container->get(VTuberInterface::class);
+        $this->assertInstanceOf(VTuberInterface::class, $uduki);
+        $this->assertSame("uduki", $uduki->getName());
+    }
+
+    public function testNotFound(): void
+    {
+        $container = new Container();
+        $this->expectException(ContainerException::class);
+        $container->get("Not");
     }
 }
