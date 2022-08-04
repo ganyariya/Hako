@@ -1,6 +1,6 @@
 <?php
 
-namespace Ganyariya\Hako\Tests\VTuber;
+namespace Tests\VTuber;
 
 interface VTuberInterface
 {

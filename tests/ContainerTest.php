@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Ganyariya\Hako\Tests;
+namespace Tests;
 
+use Tests\VTuber\NijisanjiVTuber;
+use Tests\VTuber\VTuberInterface;
 use Ganyariya\Hako;
 use Ganyariya\Hako\Container\Container;
 use Ganyariya\Hako\Exception\ContainerException;
-use Ganyariya\Hako\Tests\VTuber\NijisanjiVTuber;
-use Ganyariya\Hako\Tests\VTuber\VTuberInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
