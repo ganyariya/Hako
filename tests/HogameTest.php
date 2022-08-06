@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests;
 
+use Ganyariya\Hako;
 use Ganyariya\Hako\Container\Container;
 use HoGame\Controller\User\GetsController;
 use HoGame\Domain\Application\User\GetsInteractor;
@@ -66,5 +67,31 @@ class HoGameTest extends TestCase
         $this->assertSame($expectedName, $array["name"]);
         $this->assertSame($expectedAge, $array["age"]);
         $this->assertTrue(true);
+    }
+
+    public function testLoader(): void
+    {
+
+        $container = new Container();
+
+        $container->set(GetsInterface::class, Hako\fetch(GetsInteractor::class));
+        $container->set(MasterRepositoryInterface::class, function (ContainerInterface $c) {
+            return new MasterRepository();
+        });
+        $container->set(UserRepositoryInterface::class, function (ContainerInterface $c) {
+            return new UserRepository();
+        });
+
+        /** @var GetsController $controller */
+        $userId = $expectedUserId = "Test";
+        $expectedName = "StubName";
+        $expectedAge = 25;
+
+        $controller = $container->get(GetsController::class);
+        $array = $controller($userId);
+
+        $this->assertSame($expectedUserId, $array["userId"]);
+        $this->assertSame($expectedName, $array["name"]);
+        $this->assertSame($expectedAge, $array["age"]);
     }
 }
