@@ -7,7 +7,6 @@ namespace Tests;
 use Ganyariya\Hako\Container\Container;
 use HoGame\Controller\User\GetsController;
 use HoGame\Domain\Application\User\GetsInteractor;
-use HoGame\Domain\Entity\Master\MasterInterface;
 use HoGame\Domain\Service\User\AccountService;
 use HoGame\Domain\Service\User\SubAccountService;
 use HoGame\Repository\Spanner\MasterRepository;
@@ -22,6 +21,7 @@ class HoGameTest extends TestCase
 {
     public function testContainerClosure(): void
     {
+
         $container = new Container();
 
         $container->set(GetsController::class, function (ContainerInterface $c) {
@@ -62,12 +62,9 @@ class HoGameTest extends TestCase
         $controller = $container->get(GetsController::class);
         $array = $controller($userId);
 
-        // $this->assertSame("Test")
         $this->assertSame($expectedUserId, $array["userId"]);
         $this->assertSame($expectedName, $array["name"]);
         $this->assertSame($expectedAge, $array["age"]);
         $this->assertTrue(true);
-
-        var_dump($container->get(GetsController::class));
     }
 }
