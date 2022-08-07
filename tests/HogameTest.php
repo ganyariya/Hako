@@ -17,6 +17,8 @@ use HoGame\UseCase\User\GetsInterface;
 use HoGame\UseCase\User\UserRepositoryInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
+use Symfony\Component\Finder\Finder;
+use hanneskod\classtools\Iterator\ClassIterator;
 
 class HoGameTest extends TestCase
 {
@@ -74,12 +76,8 @@ class HoGameTest extends TestCase
         $container = new Container();
 
         $container->set(GetsInterface::class, Hako\fetch(GetsInteractor::class));
-        $container->set(MasterRepositoryInterface::class, function (ContainerInterface $c) {
-            return new MasterRepository();
-        });
-        $container->set(UserRepositoryInterface::class, function (ContainerInterface $c) {
-            return new UserRepository();
-        });
+        $container->set(MasterRepositoryInterface::class, Hako\fetch(MasterRepository::class));
+        $container->set(UserRepositoryInterface::class, Hako\fetch(UserRepository::class));
 
         $userId = $expectedUserId = "Test";
         $expectedName = "StubName";
