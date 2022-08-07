@@ -38,8 +38,7 @@
         ]
     },
     "require": {
-        "psr/container": "^2.0",
-        "hanneskod/classtools": "^1.2"
+        "psr/container": "^2.0"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.7",

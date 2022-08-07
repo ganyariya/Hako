@@ -13,7 +13,7 @@ final class Loader
     public function existsDeclaredClass(string $id): bool
     {
         $declaredClasses = get_declared_classes();
-        return in_array($id, $declaredClasses, true);
+        return in_array($id, $declaredClasses, true) || class_exists($id, true);
     }
 
     public function load(ContainerInterface $container, string $id): mixed
