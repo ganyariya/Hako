@@ -16,6 +16,9 @@ final class ContainerBuilder
         $this->definitions = [];
     }
 
+    /**
+     * @param array<string, mixed> $definitions
+     */
     public function addDefinitions(array $definitions): void
     {
         $this->definitions[] = $definitions;
