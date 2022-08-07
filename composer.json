@@ -1,6 +1,8 @@
 {
     "name": "ganyariya/hako",
     "type": "library",
+    "description": "A super simple DI Container",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Ganyariya\\Hako\\": "src/"
