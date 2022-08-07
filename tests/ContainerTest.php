@@ -8,12 +8,12 @@ use Tests\VTuber\NijisanjiVTuber;
 use Tests\VTuber\VTuberInterface;
 use Ganyariya\Hako;
 use Ganyariya\Hako\Container\Container;
-use Ganyariya\Hako\Exception\ContainerException;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
 class ContainerTest extends TestCase
 {
+
     public function testContainerSet(): void
     {
         $container = new Container();
@@ -67,10 +67,10 @@ class ContainerTest extends TestCase
         $this->assertSame("uduki", $uduki->getName());
     }
 
-    public function testNotFound(): void
-    {
-        $container = new Container();
-        $this->expectException(ContainerException::class);
-        $container->get("Not");
-    }
+    // public function testNotFound(): void
+    // {
+    //     $container = new Container();
+    //     $this->expectException(ContainerException::class);
+    //     $container->get("NotFound");
+    // }
 }

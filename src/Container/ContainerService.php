@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ganyariya\Hako\Container;
 
+use Ganyariya\Hako\ReflectionHelper\ReflectionHelper;
 use Psr\Container\ContainerInterface;
 
 class ContainerService
@@ -26,7 +27,7 @@ class ContainerService
         }
 
         $parameter = current($parameters);
-        $typeName = $parameter->getType()->getName();
+        $typeName = ReflectionHelper::getNameOfReflectionParameter($parameter);
         return $typeName === ContainerInterface::class;
     }
 }

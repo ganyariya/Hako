@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests;
 
+use Ganyariya\Hako;
 use Ganyariya\Hako\Container\Container;
 use HoGame\Controller\User\GetsController;
 use HoGame\Domain\Application\User\GetsInteractor;
-use HoGame\Domain\Entity\Master\MasterInterface;
 use HoGame\Domain\Service\User\AccountService;
 use HoGame\Domain\Service\User\SubAccountService;
 use HoGame\Repository\Spanner\MasterRepository;
@@ -54,20 +54,43 @@ class HoGameTest extends TestCase
             return new UserRepository();
         });
 
-        /** @var GetsController $controller */
         $userId = $expectedUserId = "Test";
         $expectedName = "StubName";
         $expectedAge = 25;
 
+        /** @var GetsController $controller */
         $controller = $container->get(GetsController::class);
         $array = $controller($userId);
 
-        // $this->assertSame("Test")
         $this->assertSame($expectedUserId, $array["userId"]);
         $this->assertSame($expectedName, $array["name"]);
         $this->assertSame($expectedAge, $array["age"]);
         $this->assertTrue(true);
+    }
 
-        var_dump($container->get(GetsController::class));
+    public function testLoader(): void
+    {
+
+        $container = new Container();
+
+        $container->set(GetsInterface::class, Hako\fetch(GetsInteractor::class));
+        $container->set(MasterRepositoryInterface::class, function (ContainerInterface $c) {
+            return new MasterRepository();
+        });
+        $container->set(UserRepositoryInterface::class, function (ContainerInterface $c) {
+            return new UserRepository();
+        });
+
+        $userId = $expectedUserId = "Test";
+        $expectedName = "StubName";
+        $expectedAge = 25;
+
+        /** @var GetsController $controller */
+        $controller = $container->get(GetsController::class);
+        $array = $controller($userId);
+
+        $this->assertSame($expectedUserId, $array["userId"]);
+        $this->assertSame($expectedName, $array["name"]);
+        $this->assertSame($expectedAge, $array["age"]);
     }
 }

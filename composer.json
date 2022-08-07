@@ -1,6 +1,8 @@
 {
     "name": "ganyariya/hako",
     "type": "library",
+    "description": "A super simple DI Container",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Ganyariya\\Hako\\": "src/"
@@ -24,12 +26,24 @@
     "scripts": {
         "test": [
             "phpunit"
+        ],
+        "phpcs": [
+            "phpcs"
+        ],
+        "phpstan": [
+            "phpstan analyse -c phpstan.neon"
+        ],
+        "psalm": [
+            "psalm"
         ]
     },
     "require": {
-        "phpunit/phpunit": "^9.5",
-        "psr/container": "^2.0",
+        "psr/container": "^2.0"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.7",
+        "vimeo/psalm": "^4.26",
         "phpstan/phpstan": "^1.8",
-        "psalm/phar": "^4.25"
+        "phpunit/phpunit": "^9.5"
     }
 }
