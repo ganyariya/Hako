@@ -22,53 +22,53 @@ use hanneskod\classtools\Iterator\ClassIterator;
 
 class HoGameTest extends TestCase
 {
-    // public function testContainerClosure(): void
-    // {
-    //     $container = new Container();
+    public function testContainerClosure(): void
+    {
+        $container = new Container();
 
-    //     $container->set(GetsController::class, function (ContainerInterface $c) {
-    //         return new GetsController(
-    //             $c->get(GetsInterface::class)
-    //         );
-    //     });
-    //     $container->set(GetsInterface::class, function (ContainerInterface $c) {
-    //         return new GetsInteractor(
-    //             $c->get(UserRepositoryInterface::class),
-    //             $c->get(MasterRepositoryInterface::class),
-    //             $c->get(AccountService::class)
-    //         );
-    //     });
-    //     $container->set(AccountService::class, function (ContainerInterface $c) {
-    //         return new AccountService(
-    //             $c->get(MasterRepositoryInterface::class),
-    //             $c->get(SubAccountService::class)
-    //         );
-    //     });
-    //     $container->set(SubAccountService::class, function (ContainerInterface $c) {
-    //         return new SubAccountService(
-    //             $c->get(MasterRepositoryInterface::class)
-    //         );
-    //     });
-    //     $container->set(MasterRepositoryInterface::class, function (ContainerInterface $c) {
-    //         return new MasterRepository();
-    //     });
-    //     $container->set(UserRepositoryInterface::class, function (ContainerInterface $c) {
-    //         return new UserRepository();
-    //     });
+        $container->set(GetsController::class, function (ContainerInterface $c) {
+            return new GetsController(
+                $c->get(GetsInterface::class)
+            );
+        });
+        $container->set(GetsInterface::class, function (ContainerInterface $c) {
+            return new GetsInteractor(
+                $c->get(UserRepositoryInterface::class),
+                $c->get(MasterRepositoryInterface::class),
+                $c->get(AccountService::class)
+            );
+        });
+        $container->set(AccountService::class, function (ContainerInterface $c) {
+            return new AccountService(
+                $c->get(MasterRepositoryInterface::class),
+                $c->get(SubAccountService::class)
+            );
+        });
+        $container->set(SubAccountService::class, function (ContainerInterface $c) {
+            return new SubAccountService(
+                $c->get(MasterRepositoryInterface::class)
+            );
+        });
+        $container->set(MasterRepositoryInterface::class, function (ContainerInterface $c) {
+            return new MasterRepository();
+        });
+        $container->set(UserRepositoryInterface::class, function (ContainerInterface $c) {
+            return new UserRepository();
+        });
 
-    //     $userId = $expectedUserId = "Test";
-    //     $expectedName = "StubName";
-    //     $expectedAge = 25;
+        $userId = $expectedUserId = "Test";
+        $expectedName = "StubName";
+        $expectedAge = 25;
 
-    //     /** @var GetsController $controller */
-    //     $controller = $container->get(GetsController::class);
-    //     $array = $controller($userId);
+        /** @var GetsController $controller */
+        $controller = $container->get(GetsController::class);
+        $array = $controller($userId);
 
-    //     $this->assertSame($expectedUserId, $array["userId"]);
-    //     $this->assertSame($expectedName, $array["name"]);
-    //     $this->assertSame($expectedAge, $array["age"]);
-    //     $this->assertTrue(true);
-    // }
+        $this->assertSame($expectedUserId, $array["userId"]);
+        $this->assertSame($expectedName, $array["name"]);
+        $this->assertSame($expectedAge, $array["age"]);
+        $this->assertTrue(true);
+    }
 
     public function testLoader(): void
     {
@@ -76,12 +76,8 @@ class HoGameTest extends TestCase
         $container = new Container();
 
         $container->set(GetsInterface::class, Hako\fetch(GetsInteractor::class));
-        $container->set(MasterRepositoryInterface::class, function (ContainerInterface $c) {
-            return new MasterRepository();
-        });
-        $container->set(UserRepositoryInterface::class, function (ContainerInterface $c) {
-            return new UserRepository();
-        });
+        $container->set(MasterRepositoryInterface::class, Hako\fetch(MasterRepository::class));
+        $container->set(UserRepositoryInterface::class, Hako\fetch(UserRepository::class));
 
         $userId = $expectedUserId = "Test";
         $expectedName = "StubName";
