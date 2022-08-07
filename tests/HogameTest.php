@@ -18,8 +18,6 @@ use HoGame\UseCase\User\GetsInterface;
 use HoGame\UseCase\User\UserRepositoryInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use Symfony\Component\Finder\Finder;
-use hanneskod\classtools\Iterator\ClassIterator;
 
 class HoGameTest extends TestCase
 {
