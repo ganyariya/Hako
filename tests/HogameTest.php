@@ -6,6 +6,7 @@ namespace Tests;
 
 use Ganyariya\Hako;
 use Ganyariya\Hako\Container\Container;
+use Ganyariya\Hako\Container\ContainerBuilder;
 use HoGame\Controller\User\GetsController;
 use HoGame\Domain\Application\User\GetsInteractor;
 use HoGame\Domain\Service\User\AccountService;
@@ -78,6 +79,31 @@ class HoGameTest extends TestCase
         $container->set(GetsInterface::class, Hako\fetch(GetsInteractor::class));
         $container->set(MasterRepositoryInterface::class, Hako\fetch(MasterRepository::class));
         $container->set(UserRepositoryInterface::class, Hako\fetch(UserRepository::class));
+
+        $userId = $expectedUserId = "Test";
+        $expectedName = "StubName";
+        $expectedAge = 25;
+
+        /** @var GetsController $controller */
+        $controller = $container->get(GetsController::class);
+        $array = $controller($userId);
+
+        $this->assertSame($expectedUserId, $array["userId"]);
+        $this->assertSame($expectedName, $array["name"]);
+        $this->assertSame($expectedAge, $array["age"]);
+    }
+
+    public function testContainerBuilder(): void
+    {
+
+        $builder = new ContainerBuilder();
+        $builder->addDefinitions([
+            GetsInterface::class => Hako\fetch(GetsInteractor::class),
+            MasterRepositoryInterface::class => Hako\fetch(MasterRepository::class),
+            UserRepositoryInterface::class => Hako\fetch(UserRepository::class)
+        ]);
+
+        $container = $builder->build();
 
         $userId = $expectedUserId = "Test";
         $expectedName = "StubName";
