@@ -35,8 +35,11 @@ $container->set("Hello", "world!");
 $container->set(UserRepositoryInterface::class, Hako\fetch(UserRepository::class));
 $container->set(MasterRepositoryInterface::class, Hako\fetch(MasterRepository::class));
 
-// Pattern2: Self Injection
+// Pattern2: Your Self Injection
 $container->set(UserRepositoryInterface::class, function(ContainerInterface $c) {
+    /**
+     * You can pre-set up objects at here.
+     */
     return new UserRepository(
         $c->get(MasterRepositoryInterface::class);
     );
@@ -78,6 +81,6 @@ $controller = $container->get(GetsController::class);
 /**
  * After setting up the Container, pass the Container to a WebFramework such as Slim or Laravel.
  * https://www.slimframework.com/docs/v4/concepts/di.html
- * /
+ */
 ```
 
