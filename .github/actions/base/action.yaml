@@ -7,17 +7,20 @@ runs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: "8.1"
+    - name: Dump Composer
+      shell: bash
+      run: composer dump-autoload
     - name: Validate Composer Packages
       shell: bash
       run: composer validate
-    - name: Cache Composer Packages
-      id: composer-cache
-      uses: actions/cache@v2
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
+    # - name: Cache Composer Packages
+    #   id: composer-cache
+    #   uses: actions/cache@v2
+    #   with:
+    #     path: vendor
+    #     key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-php-
     - name: Install Composer
       shell: bash
       run: composer install

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace HoGame\Controller\User;
+namespace Tests\HoGame\Controller\User;
 
-use HoGame\UseCase\User\GetsInputData;
-use HoGame\UseCase\User\GetsInterface;
+use Tests\HoGame\UseCase\User\GetsInputData;
+use Tests\HoGame\UseCase\User\GetsInterface;
 
 final class GetsController
 {
@@ -16,12 +16,14 @@ final class GetsController
         $this->interactor = $interactor;
     }
 
-    // 本当は \Psr\RequestInterface 系を継承したもの
+    /**
+     * @param string $userId
+     * @return mixed[]
+     */
     public function __invoke(string $userId): array
     {
         $inputData = new GetsInputData(["userId" => $userId]);
         $response = $this->interactor->handle($inputData);
-        // 本当は presenter を挟んだほうが良い
         return $response->toArray();
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace HoGame\UseCase\User;
+namespace Tests\HoGame\UseCase\User;
 
 final class GetsOutputData
 {

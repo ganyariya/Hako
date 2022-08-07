@@ -7,17 +7,17 @@ namespace Tests;
 use Ganyariya\Hako;
 use Ganyariya\Hako\Container\Container;
 use Ganyariya\Hako\Container\ContainerBuilder;
-use HoGame\Controller\User\GetsController;
-use HoGame\Domain\Application\User\GetsInteractor;
-use HoGame\Domain\Service\User\AccountService;
-use HoGame\Domain\Service\User\SubAccountService;
-use HoGame\Repository\Spanner\MasterRepository;
-use HoGame\Repository\Spanner\UserRepository;
-use HoGame\UseCase\Master\MasterRepositoryInterface;
-use HoGame\UseCase\User\GetsInterface;
-use HoGame\UseCase\User\UserRepositoryInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
+use Tests\HoGame\Controller\User\GetsController;
+use Tests\HoGame\Domain\Application\User\GetsInteractor;
+use Tests\HoGame\Domain\Service\User\AccountService;
+use Tests\HoGame\Domain\Service\User\SubAccountService;
+use Tests\HoGame\Repository\Spanner\MasterRepository;
+use Tests\HoGame\Repository\Spanner\UserRepository;
+use Tests\HoGame\UseCase\Master\MasterRepositoryInterface;
+use Tests\HoGame\UseCase\User\GetsInterface;
+use Tests\HoGame\UseCase\User\UserRepositoryInterface;
 
 class HoGameTest extends TestCase
 {

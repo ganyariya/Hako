@@ -14,7 +14,7 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/",
-            "HoGame\\": "hogame/"
+            "Tests\\HoGame\\": "tests/hogame"
         }
     },
     "authors": [
