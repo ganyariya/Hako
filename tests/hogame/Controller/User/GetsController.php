@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace HoGame\Controller\User;
+namespace Tests\HoGame\Controller\User;
 
-use HoGame\UseCase\User\GetsInputData;
-use HoGame\UseCase\User\GetsInterface;
+use Tests\HoGame\UseCase\User\GetsInputData;
+use Tests\HoGame\UseCase\User\GetsInterface;
 
 final class GetsController
 {

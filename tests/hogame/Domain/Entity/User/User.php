@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace HoGame\Domain\Entity\User;
+namespace Tests\HoGame\Domain\Entity\User;
 
 final class User
 {

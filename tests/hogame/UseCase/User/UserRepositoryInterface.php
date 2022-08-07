@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace HoGame\UseCase\User;
+namespace Tests\HoGame\UseCase\User;
 
-use HoGame\Domain\Entity\User\User;
+use Tests\HoGame\Domain\Entity\User\User;
 
 interface UserRepositoryInterface
 {

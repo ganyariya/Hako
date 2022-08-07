@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace HoGame\Repository\Spanner;
+namespace Tests\HoGame\Repository\Spanner;
 
-use HoGame\Domain\Entity\Master\MasterInterface;
-use HoGame\UseCase\Master\MasterRepositoryInterface;
+use Tests\HoGame\Domain\Entity\Master\MasterInterface;
+use Tests\HoGame\UseCase\Master\MasterRepositoryInterface;
 
 final class MasterRepository implements MasterRepositoryInterface
 {

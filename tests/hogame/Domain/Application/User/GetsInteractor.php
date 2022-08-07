@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace HoGame\Domain\Application\User;
+namespace Tests\HoGame\Domain\Application\User;
 
-use HoGame\Domain\Service\User\AccountService;
-use HoGame\UseCase\Master\MasterRepositoryInterface;
-use HoGame\UseCase\User\GetsInputData;
-use HoGame\UseCase\User\GetsInterface;
-use HoGame\UseCase\User\GetsOutputData;
-use HoGame\UseCase\User\UserRepositoryInterface;
+use Tests\HoGame\Domain\Service\User\AccountService;
+use Tests\HoGame\UseCase\Master\MasterRepositoryInterface;
+use Tests\HoGame\UseCase\User\GetsInputData;
+use Tests\HoGame\UseCase\User\GetsInterface;
+use Tests\HoGame\UseCase\User\GetsOutputData;
+use Tests\HoGame\UseCase\User\UserRepositoryInterface;
 
 final class GetsInteractor implements GetsInterface
 {

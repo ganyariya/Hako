@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace HoGame\UseCase\Master;
+namespace Tests\HoGame\UseCase\Master;
 
-use HoGame\Domain\Entity\Master\MasterInterface;
+use Tests\HoGame\Domain\Entity\Master\MasterInterface;
 
 interface MasterRepositoryInterface
 {

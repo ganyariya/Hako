@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace HoGame\Repository\Spanner;
+namespace Tests\HoGame\Repository\Spanner;
 
-use HoGame\Domain\Entity\User\User;
-use HoGame\UseCase\User\UserRepositoryInterface;
+use Tests\HoGame\Domain\Entity\User\User;
+use Tests\HoGame\UseCase\User\UserRepositoryInterface;
 
 class UserRepository implements UserRepositoryInterface
 {

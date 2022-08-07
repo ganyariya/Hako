@@ -13,8 +13,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/",
-            "HoGame\\": "hogame/"
+            "Tests\\": "tests/"
         }
     },
     "authors": [

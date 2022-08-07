@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace HoGame\Domain\Service\User;
+namespace Tests\HoGame\Domain\Service\User;
 
-use HoGame\UseCase\Master\MasterRepositoryInterface;
+use Tests\HoGame\UseCase\Master\MasterRepositoryInterface;
 
 final class AccountService
 {
