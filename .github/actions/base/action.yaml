@@ -7,6 +7,9 @@ runs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: "8.1"
+    - name: Dump Composer
+      shell: bash
+      run: composer dump-autoload
     - name: Validate Composer Packages
       shell: bash
       run: composer validate
