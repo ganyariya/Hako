@@ -1,10 +1,12 @@
 name: Hako Test
-on: [push, pull_request]
+on: [pull_request]
 jobs:
   test:
     name: Hako Test
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Initialize
         uses: ./.github/actions/base
       - name: Test
