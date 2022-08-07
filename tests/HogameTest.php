@@ -17,6 +17,8 @@ use HoGame\UseCase\User\GetsInterface;
 use HoGame\UseCase\User\UserRepositoryInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
+use Symfony\Component\Finder\Finder;
+use hanneskod\classtools\Iterator\ClassIterator;
 
 class HoGameTest extends TestCase
 {
@@ -72,6 +74,13 @@ class HoGameTest extends TestCase
     {
 
         $container = new Container();
+
+        $finder = new Finder();
+        $iter = new ClassIterator($finder->in('src'));
+
+        foreach ($iter->getClassMap() as $className => $splFileInfo) {
+            echo $className;
+        }
 
         $container->set(GetsInterface::class, Hako\fetch(GetsInteractor::class));
         $container->set(MasterRepositoryInterface::class, function (ContainerInterface $c) {
