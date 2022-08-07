@@ -22,7 +22,6 @@ class HoGameTest extends TestCase
 {
     public function testContainerClosure(): void
     {
-
         $container = new Container();
 
         $container->set(GetsController::class, function (ContainerInterface $c) {
@@ -55,11 +54,11 @@ class HoGameTest extends TestCase
             return new UserRepository();
         });
 
-        /** @var GetsController $controller */
         $userId = $expectedUserId = "Test";
         $expectedName = "StubName";
         $expectedAge = 25;
 
+        /** @var GetsController $controller */
         $controller = $container->get(GetsController::class);
         $array = $controller($userId);
 
@@ -82,11 +81,11 @@ class HoGameTest extends TestCase
             return new UserRepository();
         });
 
-        /** @var GetsController $controller */
         $userId = $expectedUserId = "Test";
         $expectedName = "StubName";
         $expectedAge = 25;
 
+        /** @var GetsController $controller */
         $controller = $container->get(GetsController::class);
         $array = $controller($userId);
 

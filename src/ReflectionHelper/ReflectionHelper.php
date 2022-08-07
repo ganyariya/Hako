@@ -21,7 +21,7 @@ final class ReflectionHelper
      * @throws TypeNotSpecifiedException
      */
     public static function getNameByType(
-        \ReflectionNamedType|\ReflectionUnionType|\ReflectionIntersectionType|null $type,
+        \ReflectionType|\ReflectionNamedType|\ReflectionUnionType|\ReflectionIntersectionType|null $type,
         \ReflectionParameter $parameter
     ): string {
         if (is_null($type)) {
@@ -38,6 +38,8 @@ final class ReflectionHelper
             $types = $type->getTypes();
             return self::getNameByType(current($types), $parameter);
         }
-        return strval($type);
+        if ($type instanceof \ReflectionType) {
+            return strval($type);
+        }
     }
 }

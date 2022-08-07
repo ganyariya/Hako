@@ -22,4 +22,9 @@ class NijisanjiVTuber implements VTuberInterface
     {
         return "Nijisanji";
     }
+
+    public function getAge(): int
+    {
+        return $this->age;
+    }
 }
