@@ -19,6 +19,10 @@ class Container implements ContainerInterface
 
     private Loader $dynamicLoader;
 
+    /**
+     * @param mixed[] $data
+     * @param Loader $dynamicLoader
+     */
     public function __construct(array $data = [], Loader $dynamicLoader = new Loader())
     {
         $this->data = $data;
