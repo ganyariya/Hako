@@ -1,8 +1,8 @@
-name: Hako Test
+name: Hako CI
 on: [pull_request]
 jobs:
   test:
-    name: Hako Test
+    name: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -11,3 +11,36 @@ jobs:
         uses: ./.github/actions/base
       - name: Test
         run: composer test
+
+  phpstan:
+    name: phpstan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Initialize
+        uses: ./.github/actions/base
+      - name: phpstan
+        run: composer phpstan
+
+  phpcs:
+    name: phpcs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Initialize
+        uses: ./.github/actions/base
+      - name: phpcs
+        run: composer phpcs
+
+  psalm:
+    name: psalm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Initialize
+        uses: ./.github/actions/base
+      - name: psalm
+        run: composer psalm
