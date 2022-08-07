@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ganyariya\Hako\Dynamic;
 
 use Ganyariya\Hako\Cache\Cache;
+use Ganyariya\Hako\ReflectionHelper\ReflectionHelper;
 use Psr\Container\ContainerInterface;
 
 final class Loader
@@ -20,7 +21,8 @@ final class Loader
         $class = new \ReflectionClass($id);
         $constructor = $class->getConstructor();
         $parameters = $constructor->getParameters();
-        $arguments = array_map(fn (\ReflectionParameter $r) => $container->get($r->getType()->getName()), $parameters);
+        $names = array_map(fn (\ReflectionParameter $rp) => ReflectionHelper::getNameOfReflectionParameter($rp), $parameters);
+        $arguments = array_map(fn (string $name) => $container->get($name), $names);
 
         $generated = new $id(...$arguments);
         $cache = new Cache($generated);
