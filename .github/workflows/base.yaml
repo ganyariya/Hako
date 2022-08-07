@@ -1,8 +1,8 @@
-name: Hako Test
-on: [push, pull_request]
+name: Base
+on: workflow_call
+
 jobs:
-  test:
-    name: Hako Test
+  Base:
     runs-on: ubuntu-latest
     steps:
       - name: Setup PHP
@@ -23,5 +23,3 @@ jobs:
             ${{ runner.os }}-php-
       - name: Install Composer
         run: composer install
-      - name: Test
-        run: composer test

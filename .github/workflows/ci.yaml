@@ -1,0 +1,12 @@
+name: Hako Test
+on: [push, pull_request]
+
+jobs:
+  base:
+    uses: ./.github/workflows/base.yaml
+
+  test:
+    runs-on: ubuntu-latest
+    needs: base
+    steps:
+      - run: composer test
