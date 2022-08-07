@@ -21,7 +21,10 @@ final class Loader
         $class = new \ReflectionClass($id);
         $constructor = $class->getConstructor();
         $parameters = $constructor->getParameters();
-        $names = array_map(fn (\ReflectionParameter $rp) => ReflectionHelper::getNameOfReflectionParameter($rp), $parameters);
+        $names = array_map(
+            fn (\ReflectionParameter $rp) => ReflectionHelper::getNameOfReflectionParameter($rp),
+            $parameters
+        );
         $arguments = array_map(fn (string $name) => $container->get($name), $names);
 
         $generated = new $id(...$arguments);
